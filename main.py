@@ -95,9 +95,8 @@ def sorting(list_object):  # Takes in a ListItem object and returns the priority
     return list_object.priority
 
 
-def print_list(my_list, to_save=False, show_hidden=False):  # Prints out the To-Do list from the global list variable
-    # and saves list
-    # to the .txt file
+def print_list(save_file_location, my_list, to_save=False, show_hidden=False):  # Prints out the To-Do list from the
+    # global list variable and saves list to the .txt file
     my_list.sort(key=sorting)  # Uses a custom function to be able to get the right value to sort by
     print("To-Do:")
     for item_index in my_list:  # The range needs to be the length of the list being printed
@@ -110,7 +109,7 @@ def print_list(my_list, to_save=False, show_hidden=False):  # Prints out the To-
                 print(f"{item_index.priority}.~\t{item_index.text}")  # Indicate hidden items
         # Printing the item priority with a dot, then the item, with a tab separating them
     if to_save:
-        save_list(my_list)
+        save_list(my_list, save_file_location)
     return
 
 
@@ -141,9 +140,9 @@ def clean_input(prompt='Error'):  # A special input function that will reject a 
     return float(phrase)  # Return the number the user entered
 
 
-def load_from_file():  # This is a function for readability - opens txt file in read mode and loads it into an array
-    # (list) of ListItem variables
-    data_file_r = open("C:Item_List.txt", "r")  # Open txt file in read mode
+def load_from_file(save_location):  # This is a function for readability - opens txt file in read mode and loads it
+    # into an array (list) of ListItem variables
+    data_file_r = open(save_location, "r")  # Open txt file in read mode
     list_item = ["Text", -1, 2, True]  # Item, Item Priority, group, is visible
     todo = []  # make a list of lists
     temp = 1  # Temporary counter variable to reconstruct lists from .txt file
@@ -202,8 +201,8 @@ def load_from_file():  # This is a function for readability - opens txt file in 
     return todo
 
 
-def save_list(todo_list):
-    data_file_w = open("C:Item_List.txt", "w")  # open the save file and clear the data from it
+def save_list(todo_list, save_location):
+    data_file_w = open(save_location, "w")  # open the save file and clear the data from it
     data_file_w.write(f"Warning: The Todo-List Program will not be able to load this save file if it is incorrectly "
                       f"modified. Modify at your own risk. The structure is Entry Text, Entry Priority as a number, "
                       f"Entry Group as a number, and Entry Visibility as a boolean, each on a separate line, "
@@ -298,7 +297,7 @@ def check_list_status(todo_list):  # Checks if the list is completely hidden (2)
     return state
 
 
-def menu_loop(todo_list):
+def menu_loop(todo_list, save_file_location):
     show_hidden = False
     selection = 0
     invalid_input = False
@@ -306,7 +305,7 @@ def menu_loop(todo_list):
         if invalid_input:
             invalid_input = False
         else:
-            print_list(todo_list, True, show_hidden)
+            print_list(save_file_location, todo_list, True, show_hidden)
         divider(137 + 17)  # Length of prompt statement below
         list_status = check_list_status(todo_list)
         if list_status == 0:  # No Issues
@@ -364,14 +363,15 @@ def menu_loop(todo_list):
 
 
 def main():
-    data_file_a = open("C:Item_List.txt", "a")  # Opens ItemList.txt which is accessible in the file variable,
+    save_file_location = "C:Item_List.txt"
+    data_file_a = open(save_file_location, "a")  # Opens ItemList.txt which is accessible in the file variable,
     # in append mode (using this so that if the file exists, nothing happens, but if it does not exist,
     # it gets created from w3schools.com
     data_file_a.close()  # Close the file, I now know it exists
-    loaded_list = load_from_file()
+    loaded_list = load_from_file(save_file_location)
     print(f"Welcome to the To-Do List - Version: 0.1.2")
     divider(42)  # Length of welcome statement above
-    menu_loop(loaded_list)
+    menu_loop(loaded_list, save_file_location)
 
 
 main()
