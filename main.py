@@ -226,19 +226,22 @@ def select_item(todo_list, show_hidden, prompt='Error'):  # Ask the user which i
     valid = False
     index = 0
     while not valid:
-        x = 1  # counter for index printing
+        counter = 1  # counter for index printing
+        hidden_value_offset = 0
         for item in todo_list:  # The range needs to be the length of the list being printed
             if item.visible and not show_hidden:  # Only print visible items if show hidden is false
-                print(x, item.text, sep='\t')
+                print(counter - hidden_value_offset, item.text, sep='\t')
             elif show_hidden:  # Print everything is show hidden is true
                 if item.visible:
-                    print(x, item.text, sep='\t')
+                    print(counter, item.text, sep='\t')
                 else:
-                    print(x, f"~ {item.text} ~", sep='\t')
-            x += 1
+                    print(counter, f"~ {item.text} ~", sep='\t')
+            elif not item.visible:
+                hidden_value_offset += 1
+            counter += 1
             # Printing the item number, then the item, with a tab separating them
         index = int(clean_input(prompt))
-        if index < x:
+        if index < counter:
             valid = True
         else:
             print("Invalid Input: Number is too big")
@@ -363,7 +366,7 @@ def menu_loop(todo_list, save_file_location):
 
 
 def main():
-    save_file_location = "C:Item_List.txt"
+    save_file_location = "resources/Item_List.txt"
     data_file_a = open(save_file_location, "a")  # Opens ItemList.txt which is accessible in the file variable,
     # in append mode (using this so that if the file exists, nothing happens, but if it does not exist,
     # it gets created from w3schools.com
