@@ -366,7 +366,7 @@ def menu_loop(todo_list, save_file_location):
 
 
 def main():
-    save_file_location = "resources/Item_List.txt"
+    save_file_location = "Item_List.txt"
     data_file_a = open(save_file_location, "a")  # Opens ItemList.txt which is accessible in the file variable,
     # in append mode (using this so that if the file exists, nothing happens, but if it does not exist,
     # it gets created from w3schools.com
