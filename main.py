@@ -1,16 +1,16 @@
-__author__ = 'Jordan Kooyman'
-# 1/26/21 - 4/2/2021 To-Do List Program - Integration Project for COP 1500
-# Spring 2021
-"""This program displays a customizable list of items by priority value, 
-with priority 1 being the highest. Allows the user to add, edit, 
-mark complete, show completed (hidden), and remove items. Stores the list of 
-items in a .txt file located where this program's main.py file is. All 
-changes are automatically saved to the .txt file. Also includes a fun 
-technical knowledge demonstration using numbers and text responses. The 
-program will create a new save file if none exists, and prompts for save 
-file overwrite if data cannot be read successfully. Menu navigation is 
-accomplished through numeric inputs due to the text-only interface and 
+"""This program displays a customizable list of items by priority value,
+with priority 1 being the highest. Allows the user to add, edit,
+mark complete, show completed (hidden), and remove items. Stores the list of
+items in a .txt file located where this program's main.py file is. All
+changes are automatically saved to the .txt file. Also includes a fun
+technical knowledge demonstration using numbers and text responses. The
+program will create a new save file if none exists, and prompts for save
+file overwrite if data cannot be read successfully. Menu navigation is
+accomplished through numeric inputs due to the text-only interface and
 tedium of typing out each word accurately and repeatedly."""
+__author__ = 'Jordan Kooyman'
+# 1/26/21 - 4/13/2021 To-Do List Program - Integration Project for COP 1500
+# Spring 2021
 # Configurable settings saved to a separate file (?)
 # Ability to load a different data or config file (?)
 # Color code items by group (?)
@@ -31,6 +31,11 @@ import random
 
 class ListItem:  # Create a class object that will store the data for each
     # entry in the list (custom variable)
+    """A custom object that stores four pieces of data representing each
+    entry in the todo list. Contains the text of the todo list entry,
+    the priority of the entry, the group code (NYI), and the visibility of
+    the entry"""
+
     def __init__(self, text, priority, group, visible):  # From w3schools.com
         self.text = text
         self.priority = priority
@@ -54,27 +59,36 @@ def concept_demonstration():
     thing2 = thing + ' '  # Adding space so that when thing is repeated, it
     # has a space in between
     location = input("Please enter a location\n")
-    print(f"{number} raised to the power of {number2} is {number ** number2}")
+    print(str(number) + " raised to the power of " + str(number2) + " is " +
+          str(number ** number2))
     # Raise the first number to the second number
-    print(f"{number} multiplied by {number2} is {number * number2}")
+    print("{0} multiplied by {1} is {2}".format(str(number), str(number2),
+                                                str(number * number2)))
     # Multiply the two numbers
-    print(f"{number} divided by {number2} is {number / number2}")
+    print("{0} divided by {1} is {2}".format(str(number), str(number2),
+                                             str(number / number2)))
     # Divide the first number by the second number
-    print(f"The remainder from  dividing {number} by {number2} is "
-          "{number % number2}")  # Find the modulus of the two numbers
-    print(
-        f"{number} divided by {number2} rounded down is {number // number2}")
+    print("The remainder from  dividing {0} by {1} is {2}".format(str(number),
+                                                                  str(number2),
+                                                                  str(number %
+                                                                      number2))
+          )
+    # Find the modulus of the two numbers
+    print("{0} divided by {1} rounded down is {2}".format(str(number),
+                                                          str(number2),
+                                                          str(number // number2
+                                                              )))
     # Divide the first number by the second and round it down (floor it)
-    print(
-        f"{number} plus {number2} is {number + number2}")
+    print("{0} plus {1} is {2}".format(str(number), str(number2),
+                                       str(number * number2)))
     # Add the two numbers
-    print(
-        f"{number} minus {number2} is {number - number2}")
+    print("{0} minus {1} is {2}".format(str(number), str(number2),
+                                        str(number * number2)))
     # Subtract the second number from the first number
     if number > 1:  # if the first number entered is greater than 1
-        print(
-            f"The {color + ' ' + thing} at {location} yelled "
-            f"'{thing2 * int(number - 1) + thing}'")
+        print("The {0} at {1} yelled '{2}'".format(color + ' ' + thing,
+                                                   location, thing2 *
+                                                   int(number - 1) + thing))
         # Combine two strings with + (no added space), repeat a string x
         # number of times with * (must use an integer) (I have the minus 1
         # and + thing to get the spacing to look proper and still  repeat
@@ -83,18 +97,18 @@ def concept_demonstration():
         # it is still handled in the other statement with some added user
         # shaming
     elif number < 0:  # if the first number entered is negative
-        print(
-            f"The {color + ' ' + thing} at {location} yelled "
-            f"'{thing2 * int(number)}'\nYou entered a negative number when a "
-            f"positive number was requested, so you made the {thing} mute. "
-            "Good Job.")  # Same as above, expect that it will print nothing in
-        # the yelled section if the first number entered is negative
+        print("The {0} at {1} yelled '{2}'\nYou entered a negative number "
+              "when a positive number was requested, so you made the {3} "
+              "mute. Good Job.".format(color + ' ' + thing, location, thing2 *
+                                       int(number), thing))
+        # Same as above, expect that it will print nothing in the yelled
+        # section if the first number entered is negative
     else:  # if the first number entered is 0 or 1 (because of the int()
         # function removing a decimal)
-        print(
-            f"The {color + ' ' + thing} at {location} yelled "
-            f"'{thing * int(number)}'")  # this is to prevent errant spaces
-        # or showing the phrase too many times
+        print("The {0} at {1} yelled '{2}'".format(color + ' ' + thing,
+                                                   location, thing *
+                                                   int(number)))
+        # this is to prevent errant spaces or showing the phrase too many times
     return
 
 
@@ -179,9 +193,9 @@ def print_list(save_file_location, my_list, to_save=False, show_hidden=False):
             if item_index.visible:
                 print(item_index.priority, item_index.text, sep='.\t')
             else:
-                print(
-                    f"{item_index.priority}.~\t{item_index.text}")  # Indicate
-                # hidden items
+                print("{0}.~\t{1}".format(item_index.priority, item_index.text)
+                      )
+                # Indicate hidden items
         # Printing the item priority with a dot, then the item, with a tab
         # separating them
     if to_save:
@@ -255,8 +269,8 @@ def load_from_file(save_location):  # This is a function for readability -
                     if character_index != len(
                             item) - 1:  # if it is not the last character, add
                         # it to the cleaned string
-                        cleaned_item = cleaned_item + item[
-                            character_index]  # Add every character to a
+                        cleaned_item += item[character_index]
+                        # Add every character to a
                         # but \n
                 if temp == 1:  # Item Text
                     list_item[0] = cleaned_item
@@ -291,9 +305,10 @@ def load_from_file(save_location):  # This is a function for readability -
             if key == 2:
                 key = 1  # If the random number is 2, set it to one so that
                 # the same number (2) cannot be used as the verification number
-            result2 = int(clean_input(f"Are you sure you want to delete all "
-                                      f"of your saved data\nEnter {key} to "
-                                      f"proceed, or anything else to cancel"))
+            result2 = int(clean_input("Are you sure you want to delete all "
+                                      "of your saved data\nEnter {0} to "
+                                      "proceed, or anything else to "
+                                      "cancel".format(str(key))))
             if result2 == key:
                 data_file_w = open("C:Item_List.txt", "w")
                 data_file_w.close()
@@ -324,17 +339,19 @@ def save_list(todo_list, save_location):
     No returns"""
     data_file_w = open(save_location,
                        "w")  # open the save file and clear the data from it
-    data_file_w.write(f"Warning: The Todo-List Program will not be able to "
-                      f"load this save file if it is incorrectly modified. "
-                      f"Modify at your own risk. The structure is Entry "
-                      f"Text, Entry Priority as a number, Entry Group as a "
-                      f"number (Not Yet Utilized, but necessary), and Entry "
-                      f"Visibility as a boolean, each on a separate line, a "
-                      f"single line gap in between, and the "
-                      f"very first line is skipped\n")
+    data_file_w.write("Warning: The Todo-List Program will not be able to "
+                      "load this save file if it is incorrectly modified. "
+                      "Modify at your own risk. The structure is Entry "
+                      "Text, Entry Priority as a number, Entry Group as a "
+                      "number (Not Yet Utilized, but necessary), and Entry "
+                      "Visibility as a boolean, each on a separate line, a "
+                      "single line gap in between, and the "
+                      "very first line is skipped\n")
     for item in todo_list:
-        data_file_w.write(f"{item.text}\n{item.priority}\n{item.group}\n"
-                          f"{item.visible}\n\n")
+        data_file_w.write("{0}\n{1}\n{2}\n{3}\n\n".format(item.text,
+                                                          str(item.priority),
+                                                          str(item.group),
+                                                          str(item.visible)))
     data_file_w.close()
     return
 
@@ -377,7 +394,7 @@ def select_item(todo_list, prompt='Error'):  # Ask the user
             if item.visible:
                 print(counter, item.text, sep='\t')
             else:
-                print(counter, f"~ {item.text} ~", sep='\t')
+                print(counter, "~ {0} ~".format(item.text), sep='\t')
             counter += 1
             # Printing the item number, then the item, with a tab separating
             # them
@@ -428,18 +445,18 @@ def edit_item(todo_list):
                                   "cancel")
     if item >= 0:
         while True:
-            value = clean_input(f"Which value would you like to edit? "
-                                f"Enter:\n1 for the It"
-                                f"em Text (Currently: "
-                                f"{todo_list[item].text})\n2 for the Item "
-                                f"Priority (Currently: "
-                                f"{todo_list[item].priority})\n3 to Cancel and"
-                                f" Exit")
+            value = clean_input("Which value would you like to edit? Enter:\n1"
+                                " for the Item Text (Currently: {0})\n2 for "
+                                "the Item Priority (Currently: {1})\n3 to "
+                                "Cancel and Exit".format(todo_list[item].text,
+                                                         str(todo_list[item].
+                                                             priority)))
             if value == 1:  # Item Text Change
-                print(f"The Current Text is: {todo_list[item].text}")
+                print("The Current Text is: {0}".format(todo_list[item].text))
                 todo_list[item].text = input("New Text:\n")
             elif value == 2:  # Item Priority Change
-                print(f"The Current Priority is: {todo_list[item].priority}")
+                print("The Current Priority is: {0}".format(str(todo_list[item]
+                                                                .priority)))
                 todo_list[item].priority = check_priority_overlap(
                     int(clean_input("New Priority:")), todo_list)
             # elif value == 3:  # Item Group Change
@@ -573,7 +590,7 @@ def main():
     # created from w3schools.com
     data_file_a.close()  # Close the file, I now know it exists
     loaded_list = load_from_file(save_file_location)
-    print(f"Welcome to the To-Do List - Version: 0.1.2")
+    print("Welcome to the To-Do List - Version: 0.1.2")
     divider(42)  # Length of welcome statement above
     menu_loop(loaded_list, save_file_location)
 
