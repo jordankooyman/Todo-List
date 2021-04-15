@@ -10,7 +10,7 @@ accomplished through numeric inputs due to the text-only interface and
 tedium of typing out each word accurately and repeatedly."""
 __author__ = 'Jordan Kooyman'
 
-# 1/26/21 - 4/13/2021 To-Do List Program - Integration Project for COP 1500
+# 1/26/21 - 4/15/2021 To-Do List Program - Integration Project for COP 1500
 # Spring 2021
 # Configurable settings saved to a separate file (?)
 # Ability to load a different data or config file (?)
@@ -48,8 +48,7 @@ def concept_demonstration():
     """The purpose of this function is to prompt the user for numbers and
     strings and manipulate them to demonstrate programming fluency with
     string and integer operations.
-    No inputs
-    No returns"""
+    :returns nothing"""
     number = clean_input("Please enter a positive number")
     number2 = clean_input("Please enter a number")
     while number2 == 0:  # Rejects a 0 if it is input as the second number
@@ -117,9 +116,9 @@ def cascade_list(priority_to_cascade_from, todo_list):
     """The purpose of this function is to decrement the priority number of
     every item in the provided todo list greater than the priority number
     provided.
-    priority_to_cascade_from - the number that is inserted by moving
+    :param priority_to_cascade_from: the number that is inserted by moving
     everything equal to or greater than up by one
-    todo_list - the list of ListItem objects to check in"""
+    :param todo_list: the list of ListItem objects to check in"""
     for item in todo_list:
         if item.priority >= priority_to_cascade_from:
             item.priority += 1
@@ -132,9 +131,9 @@ def check_priority_overlap(priority_to_check, todo_list):
     and if it does, prompts the user whether they want to keep it, change
     it, or move everything in the list that has a larger priority value up
     by one.
-    priority_to_check - the number to check for overlap with
-    todo_list - the list of ListItem objects to check in
-    returns the priority value, either changed or the original input"""
+    :param priority_to_check: the number to check for overlap with
+    :param todo_list: the list of ListItem objects to check in
+    :returns the priority value, either changed or the original input"""
     overlap = False
     for item in todo_list:
         if item.priority == priority_to_check:
@@ -162,8 +161,8 @@ def sorting(list_object):  # Takes in a ListItem object and returns the
     # priority value - from w3schools.com
     """The purpose of this function is to take in a ListItem custom object
     and return the priority value stored in it to be used in sorting.
-    list_object - one ListItem object
-    returns the priority value stored in the ListItem object"""
+    :param list_object: one ListItem object
+    :returns the priority value stored in the ListItem object"""
     return list_object.priority
 
 
@@ -175,13 +174,15 @@ def print_list(save_file_location, my_list, to_save=False, show_hidden=False):
     to show hidden and print out the todo list variable, skipping items
     marked as hidden unless it is told to show hidden, and saving the todo
     list to the file in the save file location if it is told to save.
-    save_file_location - the file path to get to the .txt save file
-    my_list - the list of ListItem objects to check in
-    to_save - whether or not to save the list of items to the file, default
+    :param save_file_location: the file path to get to the .txt save file
+    :param my_list: the list of ListItem objects to check in
+    :param to_save: whether or not to save the list of items to the file,
+    default
     is false
-    show_hidden - whether or not to display the hidden list items, default
+    :param show_hidden: whether or not to display the hidden list items,
+    default
     it false
-    No return"""
+    :returns nothing"""
     my_list.sort(key=sorting)  # Uses a custom function to be able to get the
     # right value to sort by
     print("To-Do:")
@@ -208,8 +209,8 @@ def divider(size=100):  # Draws a dividing line to go between sections
     # (default 100 characters long)
     """The purpose of this function is to print a dashed line across the
     screen with a specified length.
-    size - how many characters long the line should be, default is 100
-    No return"""
+    :param size: how many characters long the line should be, default is 100
+    :returns nothing"""
     for i in range(size):
         print('-', end='')  # Prints out a single dash, no newline afterwards
         # (the end= sets the last character to blank
@@ -223,8 +224,8 @@ def clean_input(prompt='Error'):  # A special input function that will reject a
     # specified in the program, it will display "Error"
     """The purpose of this function is to prompt the user for a numerical
     input and only accept a numerical input, rejects no input and text input.
-    prompt - the prompt the user sees, default is Error
-    Returns the user input as a float"""
+    :param prompt: the prompt the user sees, default is Error
+    :returns the user input as a float"""
     text = True
     phrase = '0'
     while text:
@@ -250,8 +251,8 @@ def load_from_file(save_location):  # This is a function for readability -
     """The purpose of this function is to open the .txt save file and read
     the contents into memory in the form of a list of custom ListItem
     objects.
-    save_location - the location the save file is stored in
-    returns a list of ListItem objects that is populated with the data from
+    :param save_location: the location the save file is stored in
+    :returns a list of ListItem objects that is populated with the data from
     the save file"""
     # into an array (list) of ListItem variables
     data_file_r = open(save_location, "r")  # Open txt file in read mode
@@ -335,9 +336,9 @@ def save_list(todo_list, save_location):
     """The purpose of this function is to save a list of ListItem objects to a
     specified location in a .txt file with the first line of the document
     being an explanation of the file format being used.
-    todo_list - the list of ListItem objects to save to the save file
-    save_location - the location to create or overwrite the save file
-    No returns"""
+    :param todo_list: the list of ListItem objects to save to the save file
+    :param save_location: the location to create or overwrite the save file
+    :returns nothing"""
     data_file_w = open(save_location,
                        "w")  # open the save file and clear the data from it
     data_file_w.write("Warning: The Todo-List Program will not be able to "
@@ -362,9 +363,9 @@ def add_item(todo_list):
     fields of necessary information to make a new entry in the todo list,
     the item name and priority, checking if the priority overlaps with an
     existing entry in the todo list.
-     todo_list - the list of ListItem objects to add a new ListItem object
-     to
-     No return"""
+     :param todo_list: the list of ListItem objects to add a new ListItem
+     object to
+     :returns nothing"""
     text = input("Please enter the name of the new item\n")
     priority = check_priority_overlap(
         int(clean_input("Please enter the priority of this item")), todo_list)
@@ -382,9 +383,9 @@ def select_item(todo_list, prompt='Error'):  # Ask the user
     todo list and number each individually to allow the user to select an
     item to modify or delete. The available numbers may
     skip some if some items are hidden
-    todo_list - the list of ListItem objects to display
-    prompt - the prompt to display to the user, default is Error
-    Returns the user selected item's index in a computer friendly form (
+    :param todo_list: the list of ListItem objects to display
+    :param prompt: the prompt to display to the user, default is Error
+    :returns the user selected item's index in a computer friendly form (
     starting at 0 instead of 1)"""
     valid = False
     index = 0
@@ -411,8 +412,9 @@ def remove_item(todo_list):
     """The purpose of this function is to delete a ListItem object from a
     list of ListItem objects by prompting the user for the index and
     verifying they want to delete the item.
-    todo_list - the list of ListItem objects from which to remove one object
-    No returns"""
+    :param todo_list: the list of ListItem objects from which to remove
+    one object
+    :returns nothing"""
     item = select_item(todo_list, "Please enter the item number you wish to "
                                   "remove\nEnter a negative number or zero "
                                   "to cancel")
@@ -425,8 +427,8 @@ def remove_item(todo_list):
 def mark_complete(todo_list):
     """The purpose of this function is to mark a selectedListItem object as
     hidden and not to be printed unless specified, apart from selecting items.
-    todo_list - the list of ListItem objects to modify
-    No returns"""
+    :param todo_list: the list of ListItem objects to modify
+    :returns nothing"""
     item = select_item(todo_list, "Please enter the item number you wish to "
                                   "Mark Completed and hide from the "
                                   "list\nEnter a negative number or zero to "
@@ -439,8 +441,9 @@ def mark_complete(todo_list):
 def edit_item(todo_list):
     """The purpose of this function is to edit a ListItem object in the
     list of ListItem objects, changing either the name or priority
-    todo_list - the list of ListItem objects that gets one object modified
-    No returns"""
+    :param todo_list: the list of ListItem objects that gets one object
+    modified
+    :returns nothing"""
     item = select_item(todo_list, "Please enter the item number you wish to "
                                   "edit\nEnter a negative number or zero to "
                                   "cancel")
@@ -475,8 +478,8 @@ def check_list_status(todo_list):  # Checks if the list is completely hidden
     """The purpose of this function is to check whether there are visible
     items in the list, the entire list is hidden, or the list contains no
     more ListItem objects
-    todo_list - the list of ListItem objects to check
-    Returns which condition using integer codes"""
+    :param todo_list: the list of ListItem objects to check
+    :returns which condition using integer codes"""
     if len(todo_list) == 0:
         state = 1  # Empty List
     else:
@@ -491,9 +494,9 @@ def check_list_status(todo_list):  # Checks if the list is completely hidden
 def menu_loop(todo_list, save_file_location):
     """The purpose of this function is to repeatedly display the todo list
     and user prompts menu until the program is closed
-    todo_list - the list of ListItem objects to display or modify
-    save_file_location - where the .txt save file is located for saving
-    No returns"""
+    :param todo_list: the list of ListItem objects to display or modify
+    :param save_file_location: where the .txt save file is located for saving
+    :returns nothing"""
     show_hidden = False
     selection = 0
     invalid_input = False
@@ -582,8 +585,7 @@ def main():
     specified save file location, load the save file into memory, display a
     welcome message with a divider, then start the menu loop until the
     program is closed
-    No inputs
-    No returns"""
+    :returns nothing"""
     save_file_location = "Item_List.txt"
     data_file_a = open(save_file_location, "a")  # Opens ItemList.txt which
     # is accessible in the file variable, in append mode (using this so that
@@ -596,4 +598,5 @@ def main():
     menu_loop(loaded_list, save_file_location)
 
 
-main()
+if __name__ == "__main__":
+    main()
