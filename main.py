@@ -9,6 +9,7 @@ file overwrite if data cannot be read successfully. Menu navigation is
 accomplished through numeric inputs due to the text-only interface and
 tedium of typing out each word accurately and repeatedly."""
 __author__ = 'Jordan Kooyman'
+
 # 1/26/21 - 4/13/2021 To-Do List Program - Integration Project for COP 1500
 # Spring 2021
 # Configurable settings saved to a separate file (?)
