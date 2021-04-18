@@ -58,33 +58,33 @@ def concept_demonstration():
     thing = input("Please enter a thing\n")
     thing2 = thing + ' '  # Adding space so that when thing is repeated, it
     # has a space in between
+    # Raise the first number to the second number
     location = input("Please enter a location\n")
     print(str(number) + " raised to the power of " + str(number2) + " is " +
           str(number ** number2))
-    # Raise the first number to the second number
+    # Multiply the two numbers
     print("{0} multiplied by {1} is {2}".format(str(number), str(number2),
                                                 str(number * number2)))
-    # Multiply the two numbers
+    # Divide the first number by the second number
     print("{0} divided by {1} is {2}".format(str(number), str(number2),
                                              str(number / number2)))
-    # Divide the first number by the second number
+    # Find the modulus of the two numbers
     print("The remainder from  dividing {0} by {1} is {2}".format(str(number),
                                                                   str(number2),
                                                                   str(number %
                                                                       number2))
           )
-    # Find the modulus of the two numbers
+    # Divide the first number by the second and round it down (floor it)
     print("{0} divided by {1} rounded down is {2}".format(str(number),
                                                           str(number2),
                                                           str(number // number2
                                                               )))
-    # Divide the first number by the second and round it down (floor it)
-    print("{0} plus {1} is {2}".format(str(number), str(number2),
-                                       str(number * number2)))
     # Add the two numbers
-    print("{0} minus {1} is {2}".format(str(number), str(number2),
-                                        str(number * number2)))
+    print("{0} plus {1} is {2}".format(str(number), str(number2),
+                                       str(number + number2)))
     # Subtract the second number from the first number
+    print("{0} minus {1} is {2}".format(str(number), str(number2),
+                                        str(number - number2)))
     if number > 1:  # if the first number entered is greater than 1
         print("The {0} at {1} yelled '{2}'".format(color + ' ' + thing,
                                                    location, thing2 *
